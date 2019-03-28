@@ -1,8 +1,11 @@
 {
-	"Matches":[{"actualStartTime":"2019-03-22T02:12:51.4666667",
+	"Matches":[
+			{
+			"actualStartTime":"2019-03-22T02:12:51.4666667",
 		    "description":"Qualification 1",
 		    "tournamentLevel":"Qualification",
-		    "matchNumber":1,"scoreRedFinal":44,
+		    "matchNumber":1,
+			"scoreRedFinal":44,
 		    "scoreRedFoul":0,
 		    "scoreRedAuto":6,
 		    "scoreBlueFinal":51,
@@ -16,6 +19,7 @@
 			     {"teamNumber":589,"station":"Blue1","dq":false},
 			     {"teamNumber":5634,"station":"Blue2","dq":false},
 			     {"teamNumber":330,"station":"Blue3","dq":false}
-			    ]}
+			    ]
+			}
 		 ]
 }

@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.io.*;
-public class scouter /*implements 2019Scouting*/ {
+public class Scouter /*implements 2019Scouting*/ {
 	
 	/* FIELDS */
 	private final String USER_AGENT = "Mozilla/5.0";
@@ -19,10 +19,12 @@ public class scouter /*implements 2019Scouting*/ {
 	private URLBuilder build=new URLBuilder();
 	private int responseCode=0;
 	private JsonObject MATCH;
+	private JsonObject MATCH_DATA;
+	private JsonArray TEAMS;
 	/* END FIELDS */
 	
 	// DONT TOUCH //
-	public static void main(String[] args) throws Exception {scouter scout=new scouter();scout.begin();}
+	public static void main(String[] args) throws Exception {Scouter scout=new Scouter();scout.begin();}
 	//////////////////
 
 	// Can now access non-static fields //
@@ -70,12 +72,16 @@ public class scouter /*implements 2019Scouting*/ {
 		System.out.println(obj);
 
 		MATCH=obj;
-		/*
+		MATCH_DATA=MATCH.getJsonArray("Matches").getJsonObject(0);
+		TEAMS=MATCH_DATA.getJsonArray("teams");
+/*
 {
-	"Matches":[{"actualStartTime":"2019-03-22T02:12:51.4666667",
+	"Matches":[{
+			"actualStartTime":"2019-03-22T02:12:51.4666667",
 		    "description":"Qualification 1",
 		    "tournamentLevel":"Qualification",
-		    "matchNumber":1,"scoreRedFinal":44,
+		    "matchNumber":1,
+			"scoreRedFinal":44,
 		    "scoreRedFoul":0,
 		    "scoreRedAuto":6,
 		    "scoreBlueFinal":51,
@@ -96,7 +102,6 @@ public class scouter /*implements 2019Scouting*/ {
 */
 	}public void GET() throws Exception {this.GET(matchNum);}//auxiliary
 	
-	
 	// Ease of access // 
 	private void setHeader(HttpURLConnection con, String name, String val) {con.setRequestProperty(name,val);}
 
@@ -113,7 +118,73 @@ public class scouter /*implements 2019Scouting*/ {
 	public URL getURLType() {return url;}
 
 	// ACCESSING JSON VALUES //
-	//public int get
 
-
+	// public int getMatchNumber() {return matchNum;}
+	public String getStartTime() {
+		return MATCH_DATA.getString("actualStartTime");
+	}
+	public String getTournamentLevel() {
+		return MATCH_DATA.getString("tournamentLevel");
+	}
+	public int getRedFinal() {
+		return MATCH_DATA.getInt("scoreRedFinal");
+	}
+	public int getRedFoul() {
+		return MATCH_DATA.getInt("scoreRedFoul");
+	}
+	public int getRedAuto() {
+		return MATCH_DATA.getInt("scoreRedAuto");
+	}
+	public int getBlueFinal() {
+		return MATCH_DATA.getInt("scoreBlueFinal");
+	}
+	public int getBlueFoul() {
+		return MATCH_DATA.getInt("scoreBlueFoul");
+	}
+	public int getBlueAuto() {
+		return MATCH_DATA.getInt("scoreBlueAuto");
+	}
+	public int getRed1() {
+		return TEAMS.getJsonObject(0).getInt("teamNumber");
+	}
+	public int getRed2() {
+		return TEAMS.getJsonObject(1).getInt("teamNumber");
+	}
+	public int getRed3() {
+		return TEAMS.getJsonObject(2).getInt("teamNumber");
+	}
+	public int getBlue1() {
+		return TEAMS.getJsonObject(3).getInt("teamNumber");
+	}
+	public int getBlue2() {
+		return TEAMS.getJsonObject(4).getInt("teamNumber");
+	}
+	public int getBlue3() {
+		return TEAMS.getJsonObject(5).getInt("teamNumber");
+	}
 }
+/*
+{
+	"Matches":[{"actualStartTime":"2019-03-22T02:12:51.4666667",
+		    "description":"Qualification 1",
+		    "tournamentLevel":"Qualification",
+		    "matchNumber":1,
+			"scoreRedFinal":44,
+		    "scoreRedFoul":0,
+		    "scoreRedAuto":6,
+		    "scoreBlueFinal":51,
+		    "scoreBlueFoul":3,
+		    "scoreBlueAuto":6,
+		    "postResultTime":"2019-03-22T02:15:59.3266667",
+		    "teams":[
+			     {"teamNumber":5107,"station":"Red1","dq":false},
+			     {"teamNumber":968,"station":"Red2","dq":false},
+			     {"teamNumber":3309,"station":"Red3","dq":false},
+			     {"teamNumber":589,"station":"Blue1","dq":false},
+			     {"teamNumber":5634,"station":"Blue2","dq":false},
+			     {"teamNumber":330,"station":"Blue3","dq":false}
+			    ]}
+		 ]
+}
+
+*/
