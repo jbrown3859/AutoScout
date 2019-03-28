@@ -1,3 +1,3 @@
-class 2019 Scouting {
+public interface 2019Scouting {
 	
 }
