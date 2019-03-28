@@ -1,4 +1,5 @@
-// import javax.json.*; //https://docs.oracle.com/javaee/7/api/javax/json/package-summary.html
+import javax.json.JsonReader; //https://docs.oracle.com/javaee/7/api/javax/json/package-summary.html
+import javax.json.*;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -46,9 +47,6 @@ public class scouter /*implements 2019Scouting*/ {
 		responseCode = connection.getResponseCode();
 		System.out.println(responseCode);
 
-		// new InputStreamReader((InputStream) request.getContent())
-		//parse this /\ /\
-
 		/* For getting string version
 		*/
 		BufferedReader in = new BufferedReader(
@@ -56,12 +54,19 @@ public class scouter /*implements 2019Scouting*/ {
 		String inputLine;
 		StringBuffer response = new StringBuffer();
 
+		/* Making response
+		*/
 		while ((inputLine = in.readLine()) != null) {
 			response.append(inputLine);
 		}
 		in.close();
 		System.out.println(response);
+		// RESPONSE is stringified JSON
+
 		/*
+		JsonReader jsonReader = Json.createReader(new StringReader(response.toString()));
+		JsonObject obj = jsonReader.readObject();
+		jsonReader.close();
 		*/
 
 	}public void GET() throws Exception {this.GET(matchNum);}//auxiliary
