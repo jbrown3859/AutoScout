@@ -11,17 +11,11 @@ public class URLBuilder {
 	private int paramNum = 0;
 
 	public URLBuilder(String base) {
-		url+=base;
-	}
-	public URLBuilder() {
-		this("https://frc-api.firstinspires.org/v2.0/2019/matches");
-	}
-	public String getURL() {
-		return url;
-	}
-	public URL getURLType() {
-		return new URL(url);
-	}
+		url=base;
+	}public URLBuilder() {this("https://frc-api.firstinspires.org/v2.0/2019/matches");}//auxiliary
+	
+
+	// ACTIVE METHODS //
 	public URLBuilder addDiv(String div) {
 		url+="/"+div;
 		return this;
@@ -33,8 +27,14 @@ public class URLBuilder {
 	}
 
 
+	// ACCESSOR METHODS //
+	public String getURL() {return url;}
+	public URL getURLType() {return new URL(url);}
 
 
-
-
+	// SET METHODS //
+	public URLBuilder setBase(String base) {
+		url=base;
+		return this;
+	}
 }
