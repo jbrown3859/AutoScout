@@ -1,4 +1,4 @@
-import javax.json.*; //https://docs.oracle.com/javaee/7/api/javax/json/package-summary.html
+// import javax.json.*; //https://docs.oracle.com/javaee/7/api/javax/json/package-summary.html
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -10,20 +10,28 @@ public class scouter /*implements 2019Scouting*/ {
 	
 	/* FIELDS */
 	private final String USER_AGENT = "Mozilla/5.0";
-	private int matchNum = 0;
-	private String eventCode = "CAAV";
+	private int matchNum = 1;
+	private String eventCode = "CALA";
 	private String authCode = "amJyb3duMzg1OTpCMjJDQUUzQy0xNkNGLTQwMzEtOTk3NC0wRDYwNEJGOEVBRTc=";
-	private URL url="https://frc-api.firstinspires.org";
+	private String urls="https://frc-api.firstinspires.org";
+	private URL url;
 	private URLBuilder build=new URLBuilder();
 	private int responseCode=0;
 	/* END FIELDS */
 	
-	
-	public static void main(String[] args) {
-		build.addDiv(eventCode).addParam("matchNumber",matchNum);
+	// DONT TOUCH //
+	public static void main(String[] args) throws Exception {scouter scout=new scouter();scout.begin();}
+	//////////////////
+
+	// Can now access non-static fields //
+	public void begin() throws Exception {
+		build.addDiv(eventCode).addParam("tournamentLevel","Qualification").addParam("matchNumber",matchNum);
 		url=build.getURLType();
+		//url=new URL("https://frc-api.firstinspires.org");
+		GET();
 	}
-	
+
+
 	// Send the GET Request //
 	public void GET(int m) throws Exception {
 		
@@ -33,10 +41,28 @@ public class scouter /*implements 2019Scouting*/ {
 		
 		// Setting HEADERS //
 		setHeader(connection,"Accept","application/json");
-		setHeader(connection,"Authorization",authCode);
-		setHeader(connection,"User-Agent",USER_AGENT);
+		setHeader(connection,"Authorization","Basic "+authCode);
 		
 		responseCode = connection.getResponseCode();
+		System.out.println(responseCode);
+
+		// new InputStreamReader((InputStream) request.getContent())
+		//parse this /\ /\
+
+		/* For getting string version
+		*/
+		BufferedReader in = new BufferedReader(
+		        new InputStreamReader(connection.getInputStream()));
+		String inputLine;
+		StringBuffer response = new StringBuffer();
+
+		while ((inputLine = in.readLine()) != null) {
+			response.append(inputLine);
+		}
+		in.close();
+		System.out.println(response);
+		/*
+		*/
 
 	}public void GET() throws Exception {this.GET(matchNum);}//auxiliary
 	
@@ -46,15 +72,15 @@ public class scouter /*implements 2019Scouting*/ {
 
 	// SET Methods //
 	public void setMatch(int m) {matchNum=m;}
-	public void setEventCode(String code) {eventCode=code;}
+	public void setEventCode(String code) {eventCode=code.toUpperCase();}
 	public void setAuth(String code) {authCode=code;}
 	
 	// Accessor Methods //
 	public int getResponseCode() {return responseCode;}
 	public int getMatchNumber() {return matchNum;}
 	public String getEventCode() {return eventCode;}
-	public String getURL() {return url;}
-	public URL getURLType() {return new URL(url);}
+	public String getURL() {return urls;}
+	public URL getURLType() {return url;}
 
 
 }

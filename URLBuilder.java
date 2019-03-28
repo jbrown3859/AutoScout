@@ -1,4 +1,4 @@
-import javax.json.*; //https://docs.oracle.com/javaee/7/api/javax/json/package-summary.html
+// import javax.json.*; //https://docs.oracle.com/javaee/7/api/javax/json/package-summary.html
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -21,15 +21,15 @@ public class URLBuilder {
 		return this;
 	}
 	public URLBuilder addParam(String paramName, String val) {
-		paramNum++;
 		url+=(paramNum==0) ? ("?"+paramName+"="+val) : ("&"+paramName+"="+val);
+		paramNum++;
 		return this;
-	}
+	}public URLBuilder addParam(String paramName, int val) {return this.addParam(paramName,val+"");}
 
 
 	// ACCESSOR METHODS //
 	public String getURL() {return url;}
-	public URL getURLType() {return new URL(url);}
+	public URL getURLType() throws Exception {return new URL(url);}
 
 
 	// SET METHODS //

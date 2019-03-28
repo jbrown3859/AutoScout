@@ -1,4 +1,4 @@
 javac *.java
 pause
-java -cp scouter;
+java scouter
 pause
