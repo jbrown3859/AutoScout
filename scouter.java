@@ -7,13 +7,14 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.io.*;
+import java.util.Scanner;
 public class Scouter /*implements 2019Scouting*/ {
 	
 	/* FIELDS */
 	private final String USER_AGENT = "Mozilla/5.0";
 	private int matchNum = 1;
 	private String eventCode = "CALA";
-	private String authCode = "amJyb3duMzg1OTpCMjJDQUUzQy0xNkNGLTQwMzEtOTk3NC0wRDYwNEJGOEVBRTc=";
+	private String authCode;
 	private String urls="https://frc-api.firstinspires.org";
 	private URL url;
 	private URLBuilder build=new URLBuilder();
@@ -32,6 +33,10 @@ public class Scouter /*implements 2019Scouting*/ {
 		build.addDiv(eventCode).addParam("tournamentLevel","Qualification").addParam("matchNumber",matchNum);
 		url=build.getURLType();
 		//url=new URL("https://frc-api.firstinspires.org");
+		File auth=new File("auth.txt");
+		Scanner sc=new Scanner(auth);
+		authCode=sc.nextLine();
+
 		GET();
 	}
 
@@ -45,7 +50,7 @@ public class Scouter /*implements 2019Scouting*/ {
 		
 		// Setting HEADERS //
 		setHeader(connection,"Accept","application/json");
-		setHeader(connection,"Authorization","Basic "+authCode);
+		setHeader(connection,"Authorization",authCode);
 		
 		responseCode = connection.getResponseCode();
 		System.out.println(responseCode);
