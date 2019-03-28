@@ -1,0 +1,21 @@
+{
+	"Matches":[{"actualStartTime":"2019-03-22T02:12:51.4666667",
+		    "description":"Qualification 1",
+		    "tournamentLevel":"Qualification",
+		    "matchNumber":1,"scoreRedFinal":44,
+		    "scoreRedFoul":0,
+		    "scoreRedAuto":6,
+		    "scoreBlueFinal":51,
+		    "scoreBlueFoul":3,
+		    "scoreBlueAuto":6,
+		    "postResultTime":"2019-03-22T02:15:59.3266667",
+		    "teams":[
+			     {"teamNumber":5107,"station":"Red1","dq":false},
+			     {"teamNumber":968,"station":"Red2","dq":false},
+			     {"teamNumber":3309,"station":"Red3","dq":false},
+			     {"teamNumber":589,"station":"Blue1","dq":false},
+			     {"teamNumber":5634,"station":"Blue2","dq":false},
+			     {"teamNumber":330,"station":"Blue3","dq":false}
+			    ]}
+		 ]
+}

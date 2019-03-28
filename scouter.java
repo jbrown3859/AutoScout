@@ -1,4 +1,4 @@
-import javax.json.JsonReader; //https://docs.oracle.com/javaee/7/api/javax/json/package-summary.html
+// import javax.json.JsonReader; //https://docs.oracle.com/javaee/7/api/javax/json/package-summary.html
 import javax.json.*;
 
 import java.io.BufferedReader;
@@ -6,7 +6,7 @@ import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
+import java.io.*;
 public class scouter /*implements 2019Scouting*/ {
 	
 	/* FIELDS */
@@ -18,6 +18,7 @@ public class scouter /*implements 2019Scouting*/ {
 	private URL url;
 	private URLBuilder build=new URLBuilder();
 	private int responseCode=0;
+	private JsonObject MATCH;
 	/* END FIELDS */
 	
 	// DONT TOUCH //
@@ -60,14 +61,15 @@ public class scouter /*implements 2019Scouting*/ {
 			response.append(inputLine);
 		}
 		in.close();
-		System.out.println(response);
+		// System.out.println(response);
 		// RESPONSE is stringified JSON
 
-		/*
 		JsonReader jsonReader = Json.createReader(new StringReader(response.toString()));
 		JsonObject obj = jsonReader.readObject();
 		jsonReader.close();
-		*/
+		System.out.println(obj);
+
+		MATCH=obj;
 
 	}public void GET() throws Exception {this.GET(matchNum);}//auxiliary
 	
@@ -86,6 +88,9 @@ public class scouter /*implements 2019Scouting*/ {
 	public String getEventCode() {return eventCode;}
 	public String getURL() {return urls;}
 	public URL getURLType() {return url;}
+
+	// ACCESSING JSON VALUES //
+	//public int get
 
 
 }

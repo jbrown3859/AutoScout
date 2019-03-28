@@ -1,4 +1,4 @@
-javac -cp .;javax.json.jar *.java
+javac -cp ".;*.jar" *.java
 pause
 java scouter
 pause
