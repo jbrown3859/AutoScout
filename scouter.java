@@ -25,11 +25,11 @@ public class Scouter /*implements 2019Scouting*/ {
 	/* END FIELDS */
 	
 	// DONT TOUCH //
-	public static void main(String[] args) throws Exception {Scouter scout=new Scouter();scout.begin();}
+	//public static void main(String[] args) throws Exception {Scouter scout=new Scouter();scout.begin();}
 	//////////////////
 
 	// Can now access non-static fields //
-	public void begin() throws Exception {
+	public Scouter() throws Exception {
 		build.addDiv(eventCode).addParam("tournamentLevel","Qualification").addParam("matchNumber",matchNum);
 		url=build.getURLType();
 		//url=new URL("https://frc-api.firstinspires.org");
@@ -53,7 +53,7 @@ public class Scouter /*implements 2019Scouting*/ {
 		setHeader(connection,"Authorization",authCode);
 		
 		responseCode = connection.getResponseCode();
-		System.out.println(responseCode);
+		//System.out.println(responseCode);
 
 		/* For getting string version
 		*/
@@ -74,7 +74,7 @@ public class Scouter /*implements 2019Scouting*/ {
 		JsonReader jsonReader = Json.createReader(new StringReader(response.toString()));
 		JsonObject obj = jsonReader.readObject();
 		jsonReader.close();
-		System.out.println(obj);
+		//System.out.println(obj);
 
 		MATCH=obj;
 		MATCH_DATA=MATCH.getJsonArray("Matches").getJsonObject(0);
