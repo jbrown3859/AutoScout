@@ -1,3 +1,3 @@
 javac -cp ".;*.jar" *.java
-java Scouter
+java DataCollector
 pause
