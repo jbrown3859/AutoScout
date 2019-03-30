@@ -3,7 +3,7 @@ public class DataCollector {
 		
 		// TESTING
 		Scouter getter=new Scouter();
-		getter.GET(2);
+		getter.GET(3);
 		System.out.println(getter.getRedFinal());
 	
 	

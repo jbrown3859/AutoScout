@@ -26,7 +26,6 @@ public class URLBuilder {
 		return this;
 	}public URLBuilder addParam(String paramName, int val) {return this.addParam(paramName,val+"");}
 
-
 	// ACCESSOR METHODS //
 	public String getURL() {return url;}
 	public URL getURLType() throws Exception {return new URL(url);}
